@@ -66,7 +66,6 @@ def main():
         def progress_function(stream, chunk, bytes_remaining):
             size = ys.filesize
             print(round((1-bytes_remaining/size)*100, 3), '% done...',end='\r')
-
         for i in range(0,len(links)):
             link = links[i]
             print("\nGetting Details of Video")
