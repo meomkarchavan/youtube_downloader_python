@@ -25,9 +25,8 @@ def main():
         print("\nGetting Details of Playlist")
         pl = Playlist(url)
         os.system('cls')
-        # print("\nDetails for Playlist","\n")
-        # print("Title:   ",pl.title())
-        os.system('cls')
+        print("\nDetails for Playlist","\n")
+        print("Title:   ",pl.title()) #may not work for some playlist
         print("\nDownloading...")
         pl.download_all(SAVE_PATH)
         print("\nDownload completed!!")
