@@ -2,72 +2,76 @@ from helper import humanbytes,fileExists,urlChecker,pathExistsElseCreate,connect
 from pytube import YouTube
 import os
 
-# Asking for all the video links
 def main():
     # check is user is conncted to internet
     if not connect():
         print('No Internet Connection!\nExiting....')
         exit() #exit is not
     else:
-        while True:
-            # check is user want to download multiple files
-            multiple=input('\nDo you want to dowanlod multiple videos?(y/n): ').lower()
-            if(multiple==('y')):
-                while True:
-                    # get txt file from user
-                    via_txt=input('\nDo you want to send links via a txt file?(y/n)').lower()
-                    if(via_txt=='y'):
-                        while True:
-                            path=input('\nEnter the path of txt file with video links on each line: ')
-                            if(fileExists):
-                                # urlChecker checks if the url is valid youtube link
-                                links=[url for url in open('Example_links.txt', "r").read().splitlines() if urlChecker(url)]                                break
-                            else:
-                                print('File Not Found!, Please Check the file path')
-                    elif(via_txt=='n'):
-                        # get one by one link from user
-                        while True:
-                            try:
-                                n = int(input("Enter the number of youtube videos to download:   "))
-                                print("\nEnter all the links one per line:")
-                                links=[]
-                                for i in range(0,n):
-                                    while True:
-                                        url=input()
-                                        if(urlChecker(url)):
-                                            links.append(url)
-                                            break
-                                        else:
-                                            print('Invalid Input!')
-                            except ValueError:
-                                print('Invalid Input!')
-                    else:
-                        print('Invalid Input!')
-            elif(multiple=='n'):
-                # get single link from user
-                while True:
-                    print("\nEnter the link of Video:")
-                    url=input()
-                    links=[]
-                    if(urlChecker(url)):
-                        links.append(url)
-                        break
-                    else:print('Invalid Input!')
-                break
-            else:
-                print('Invalid Input!')
+        links=['https://youtu.be/qbW6FRbaSl0']
+        # while True:
+        #     # check is user want to download multiple files
+        #     multiple=input('\nDo you want to dowanlod multiple videos?(y/n): ').lower()
+        #     if(multiple==('y')):
+        #         while True:
+        #             # get txt file from user
+        #             via_txt=input('\nDo you want to send links via a txt file?(y/n)').lower()
+        #             if(via_txt=='y'):
+        #                 while True:
+        #                     path=input('\nEnter the path of txt file with video links on each line: ')
+        #                     if(fileExists):
+        #                         # urlChecker checks if the url is valid youtube link
+        #                         links=[url for url in open('Example_links.txt', "r").read().splitlines() if urlChecker(url)]
+        #                         break
+        #                     else:
+        #                         print('File Not Found!, Please Check the file path')
+        #             elif(via_txt=='n'):
+        #                 # get one by one link from user
+        #                 while True:
+        #                     try:
+        #                         n = int(input("Enter the number of youtube videos to download:   "))
+        #                         print("\nEnter all the links one per line:")
+        #                         links=[]
+        #                         for i in range(0,n):
+        #                             while True:
+        #                                 url=input()
+        #                                 if(urlChecker(url)):
+        #                                     links.append(url)
+        #                                     break
+        #                                 else:
+        #                                     print('Invalid Input!')
+        #                     except ValueError:
+        #                         print('Invalid Input!')
+        #             else:
+        #                 print('Invalid Input!')
+        #     elif(multiple=='n'):
+        #         # get single link from user
+        #         while True:
+        #             print("\nEnter the link of Video:")
+        #             url=input()
+        #             links=[]
+        #             if(urlChecker(url)):
+        #                 links.append(url)
+        #                 break
+        #             else:print('Invalid Input!')
+        #         break
+        #     else:
+        #         print('Invalid Input!')
         while True:
             temp=pathExistsElseCreate(input('\nEnter Destination Path("." for this dir):'))
             if temp is not None:
                 SAVE_PATH=temp
                 break
             else:print('Invalid Path!')
+        def progress_function(stream, chunk, bytes_remaining):
+            size = ys.filesize
+            print(round((1-bytes_remaining/size)*100, 3), '% done...',end='\r')
 
         for i in range(0,len(links)):
             link = links[i]
             print("\nGetting Details of Video")
             # get video object
-            yt = YouTube(link)
+            yt = YouTube(link,on_progress_callback=progress_function)
             os.system('cls')
             print("\nDetails for Video","\n")
             print("Title:   ",yt.title)
