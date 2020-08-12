@@ -1,5 +1,7 @@
 import os
 import re
+import urllib.request
+
 def humanbytes(B):
    'Return the given bytes as a human friendly KB, MB, GB, or TB string'
    B = float(B)
@@ -35,8 +37,6 @@ def pathExistsElseCreate(DIR):
 def urlChecker(url):
    pattern = re.compile("^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$")
    return bool(pattern.match(url))
-
-import urllib.request
 
 def connect(host='http://google.com'):
     try:
