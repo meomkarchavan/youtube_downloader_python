@@ -6,9 +6,10 @@ def main():
     # check is user is conncted to internet
     if not connect():
         print('No Internet Connection!\nExiting....')
-        exit() #exit is not
+        exit() #exit if not
     else:
         while True:
+        	# url='https://www.youtube.com/watch?v=Edpy1szoG80&list=PL153hDY-y1E00uQtCVCVC8xJ25TYX8yPU'
         	url=input('Enter the Playlist link to Download: ')
         	if urlChecker(url):
         		break
@@ -20,9 +21,12 @@ def main():
                 break
             else:print('Invalid Path!')
 
-        print("\nGetting Details of Video")
-        # get Playlist object
+        
+        print("\nGetting Details of Playlist")
         pl = Playlist(url)
+        os.system('cls')
+        # print("\nDetails for Playlist","\n")
+        # print("Title:   ",pl.title())
         os.system('cls')
         print("\nDownloading...")
         pl.download_all(SAVE_PATH)
