@@ -9,6 +9,7 @@ YouTube is the most popular video-sharing platform in the world and as a hacker 
 ## Features
 - Download Single or Multiple YouTube Videos
 - Download At Various Resolution
+- PlayList Download
 
 ## Installation
 
