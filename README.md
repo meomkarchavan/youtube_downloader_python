@@ -17,3 +17,6 @@ Install requirements.txt.
 ```bash
 $ pip install requirements.txt
 ```
+## TODO
+- Add Gui
+- Integrate With Telegram Bot
